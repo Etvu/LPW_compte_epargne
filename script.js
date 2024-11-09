@@ -38,36 +38,60 @@ console.log("Intérêts annuels de 3% ajoutés. Nouveau solde : "+ solde + "euro
 
 
 ajouterArgent(depot)
-tab[0] = "depot de "+depot
+ajouterOperation("depot", depot)
+
 retirerArgent(retrait)
-tab[1] = "retrait de "+retrait
+ajouterOperation("retrait", retrait)
+
 ajouterInteret(TAUXINTERET)
-tab[2] = "calcul interet de "+TAUXINTERET
+ajouterOperation("interet", TAUXINTERET)
+
 ajouterArgent(nouveauDepot)
-tab[3] = "retrait de "+nouveauDepot
+ajouterOperation("depot", nouveauDepot)
+
 retirerArgent(nouveauRetrait)
-tab[4] = "retrait de "+nouveauRetrait
+ajouterOperation("retrait", nouveauRetrait)
+
 ajouterInteret(TAUXINTERET)
-tab[5] = "calcul interet de "+TAUXINTERET
+ajouterOperation("interet", TAUXINTERET)
+
+
 console.log(tab)
 function ajouterArgent(montant){
-    solde= solde+montant
-    console.log("Vous avez déposé " + montant + " euros. Nouveau solde : "+solde+ " euros.")
+    if (montant>=0){
+        solde= solde+montant
+        console.log("Vous avez déposé " + montant + " euros. Nouveau solde : "+solde+ " euros.")
+    }else{
+        console.log("Montant négatif, transaction impossible")
+    }
+    
     return solde
 }
 
 function retirerArgent(montant){
-    if(solde>=retrait){ //si solde suffisant on retire
-        solde= solde-montant
-        console.log("Vous avez retiré " + retrait + " euros. Nouveau solde : "+solde+ " euros.") //premier retrait
-        return solde
+    if (montant>=0){
+        if(solde>=retrait){ //si solde suffisant on retire
+            solde= solde-montant
+            console.log("Vous avez retiré " + retrait + " euros. Nouveau solde : "+solde+ " euros.") //premier retrait
+            
+        }else{
+            console.log("Solde insuffisant pour effectuer ce retrait.")
+        } 
     }else{
-        console.log("Solde insuffisant pour effectuer ce retrait.")
-    } 
+        console.log("Montant négatif, transaction impossible")
+    }
+    return solde
 }
 function ajouterInteret(TAUXINTERET){
     interet = solde*TAUXINTERET //calcul interet
     solde = interet+solde //ajoute interet au solde
-    console.log("Intérêts annuels de 3% ajoutés. Nouveau solde : "+ solde + "euros.") 
+    console.log("Intérêts annuels de 3% ajoutés. Nouveau solde : "+ solde.toFixed(2) + "euros.") 
     return TAUXINTERET
+}
+function ajouterOperation(type, montant) {
+    tab.push({
+        type: type,
+        montant: montant,
+        date: new Date().toLocaleString()
+    });
 }
