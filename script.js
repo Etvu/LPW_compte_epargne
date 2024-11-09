@@ -58,7 +58,7 @@ ajouterOperation("interet", TAUXINTERET)
 
 console.log(tab)
 function ajouterArgent(montant){
-    if (montant>=0){ //si le montant est négatif on peut pas faire la transaction
+    if (montant>0){ //si le montant est négatif on peut pas faire la transaction
         solde= solde+montant
         console.log("Vous avez déposé " + montant + " euros. Nouveau solde : "+solde+ " euros.")
     }else{
@@ -69,7 +69,7 @@ function ajouterArgent(montant){
 }
 
 function retirerArgent(montant){
-    if (montant>=0){
+    if (montant>0){
         if(solde>=retrait){ //si solde suffisant on retire
             solde= solde-montant
             console.log("Vous avez retiré " + retrait + " euros. Nouveau solde : "+solde+ " euros.") //premier retrait
