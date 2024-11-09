@@ -37,8 +37,8 @@ console.log("Intérêts annuels de 3% ajoutés. Nouveau solde : "+ solde + "euro
 */
 
 
-ajouterArgent(depot)
-ajouterOperation("depot", depot)
+ajouterArgent(depot) // depot/retrait/interet
+ajouterOperation("depot", depot) //mise en tableau
 
 retirerArgent(retrait)
 ajouterOperation("retrait", retrait)
@@ -58,7 +58,7 @@ ajouterOperation("interet", TAUXINTERET)
 
 console.log(tab)
 function ajouterArgent(montant){
-    if (montant>=0){
+    if (montant>=0){ //si le montant est négatif on peut pas faire la transaction
         solde= solde+montant
         console.log("Vous avez déposé " + montant + " euros. Nouveau solde : "+solde+ " euros.")
     }else{
@@ -88,10 +88,10 @@ function ajouterInteret(TAUXINTERET){
     console.log("Intérêts annuels de 3% ajoutés. Nouveau solde : "+ solde.toFixed(2) + "euros.") 
     return TAUXINTERET
 }
-function ajouterOperation(type, montant) {
+function ajouterOperation(type, montant) { //classement dans le tableau en fonction du type et du montant
     tab.push({
         type: type,
         montant: montant,
-        date: new Date().toLocaleString()
+        date: new Date().toLocaleString() //la date 
     });
 }
